@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Received | NAPPS Ogun</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #051a13; --accent: #c5a028; --bg: #f4f1ea; --white: #ffffff; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background: var(--bg); font-family: 'Montserrat', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+        .success-card { max-width: 500px; width: 90%; background: var(--white); padding: 60px 40px; border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .icon-circle { width: 80px; height: 80px; background: #f0fdf4; color: #15803d; font-size: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; animation: pop 0.4s ease-out; }
+        @keyframes pop { from { transform: scale(0.5); } to { transform: scale(1); } }
+        h1 { font-family: 'Cormorant Garamond'; font-size: 2.2rem; margin-bottom: 10px; }
+        p { color: #666; margin-bottom: 30px; font-size: 0.95rem; }
+        .ref-box { padding: 10px; border: 1px dashed #ccc; border-radius: 8px; font-family: monospace; font-weight: bold; margin-bottom: 30px; background: #fafafa; }
+        .btn { display: block; padding: 16px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: 0.3s; background: var(--primary); color: var(--accent); }
+        .btn:hover { transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+    <div class="success-card">
+        <div class="icon-circle"><i class="fas fa-check"></i></div>
+        <h1>Ticket Received</h1>
+        <p>Your support ticket has been successfully logged. An officer will review your request shortly.</p>
+        <div class="ref-box">REF: <span id="ref">NP-00000</span></div>
+        <a href="index.html" class="btn">RETURN TO DASHBOARD</a>
+    </div>
+    <script>
+        document.getElementById('ref').innerText = "NP-" + Math.floor(10000 + Math.random() * 90000);
+    </script>
+</body>
+</html>

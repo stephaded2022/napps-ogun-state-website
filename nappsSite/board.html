@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAPPS Premium Service Board</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #062117; --gold: #d4af37; --ease: cubic-bezier(0.23, 1, 0.32, 1); }
+        body { background: transparent; margin: 0; padding: 20px; font-family: 'Inter', sans-serif; }
+        
+        .search-area { max-width: 600px; margin: 0 auto 40px; position: relative; }
+        .search-area input { 
+            width: 100%; padding: 15px 50px; border-radius: 50px; border: 1px solid #ddd; 
+            outline: none; font-size: 1rem; transition: 0.3s;
+        }
+        .search-area i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #999; }
+        .search-area input:focus { border-color: var(--gold); box-shadow: 0 5px 15px rgba(212,175,55,0.1); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        
+        .card { 
+            background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.4s var(--ease); border: 1px solid rgba(0,0,0,0.05); opacity: 0; transform: translateY(20px);
+        }
+        .card.show { opacity: 1; transform: translateY(0); }
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); }
+
+        .img-box { height: 180px; background: #051a13; position: relative; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .badge { position: absolute; top: 15px; right: 15px; background: var(--primary); color: var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 800; border-radius: 4px; border: 1px solid var(--gold); }
+
+        .info { padding: 20px; }
+        .info h4 { font-family: 'Cormorant Garamond'; font-size: 1.5rem; margin: 0 0 10px; color: var(--primary); }
+        .loc { font-size: 0.8rem; color: #666; display: flex; align-items: center; gap: 8px; }
+
+        .btn-call { 
+            display: block; width: 100%; padding: 15px; background: var(--primary); color: var(--gold); 
+            text-align: center; text-decoration: none; font-weight: 700; font-size: 0.75rem; letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-area">
+    <i class="fas fa-search"></i>
+    <input type="text" id="schoolSearch" placeholder="Search verified institutions...">
+</div>
+
+<div id="school-grid" class="grid">
+    </div>
+
+<script>
+    let schools = [];
+
+    async function loadData() {
+        const grid = document.getElementById('school-grid');
+        try {
+            const res = await fetch('/api/api?type=schools');
+            const data = await res.json();
+            // Show only verified ones
+            schools = data.filter(s => s.status === 'verified');
+            render(schools);
+        } catch (e) {
+            grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:#999;">Unable to connect to the registry.</p>`;
+        }
+    }
+
+    function render(list) {
+        const grid = document.getElementById('school-grid');
+        grid.innerHTML = list.map((s, i) => `
+            <div class="card" style="transition-delay: ${i * 100}ms">
+                <div class="img-box">
+                    <div class="badge">VERIFIED</div>
+                    <img src="${s.image || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500'}" alt="School">
+                </div>
+                <div class="info">
+                    <h4>${s.school}</h4>
+                    <div class="loc"><i class="fas fa-map-marker-alt"></i> ${s.location}</div>
+                </div>
+                <a href="tel:${s.phone}" class="btn-call">CONTACT INSTITUTION</a>
+            </div>
+        `).join('');
+        
+        // Trigger animations
+        setTimeout(() => {
+            document.querySelectorAll('.card').forEach(c => c.classList.add('show'));
+        }, 50);
+    }
+
+    document.getElementById('schoolSearch').addEventListener('input', e => {
+        const term = e.target.value.toLowerCase();
+        const filtered = schools.filter(s => s.school.toLowerCase().includes(term) || s.location.toLowerCase().includes(term));
+        render(filtered);
+    });
+
+    window.onload = loadData;
+</script>
+</body>
+</html>

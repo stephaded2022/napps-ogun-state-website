@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Login | NAPPS Ogun</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #062117;
+            --gold: #d4af37;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background: var(--primary);
+            font-family: 'Inter', sans-serif;
+            display: flex; align-items: center; justify-content: center;
+            height: 100vh; overflow: hidden;
+            background-image: linear-gradient(rgba(6, 33, 23, 0.9), rgba(6, 33, 23, 0.9)), 
+                              url('https://www.transparenttextures.com/patterns/black-paper.png');
+        }
+
+        .login-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-top: 5px solid var(--gold);
+        }
+
+        .logo-area h1 {
+            font-family: 'Cormorant Garamond';
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        .logo-area p {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border-radius: 12px;
+            border: 1.5px solid #e2e8f0;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: var(--gold);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: #0a3a29;
+            transform: translateY(-2px);
+        }
+
+        #errorMsg {
+            color: #ef4444;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="logo-area">
+        <h1>NAPPS OGUN</h1>
+        <p>State Council Command</p>
+    </div>
+
+    <div id="errorMsg">Invalid Passcode. Please try again.</div>
+
+    <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="passcode" placeholder="Enter Council PIN" maxlength="6">
+    </div>
+
+    <button onclick="handleLogin()">Authorize Access</button>
+
+    <p style="margin-top: 25px; font-size: 0.7rem; color: #64748b;">
+        Secure Access for Elected Officers Only
+    </p>
+</div>
+
+<script>
+    // DEFINE YOUR COUNCIL PINs HERE
+    const COUNCIL_KEYS = {
+        "7788": "Treasurer",
+        "5566": "PRO",
+        "9900": "Secretary",
+        "2024": "Secretary" // Master Key acts as Secretary (Full View)
+    };
+
+    function handleLogin() {
+        const pin = document.getElementById('passcode').value;
+        const error = document.getElementById('errorMsg');
+        
+        if (COUNCIL_KEYS[pin]) {
+            // SUCCESS: Set session variables
+            sessionStorage.setItem('council_role', COUNCIL_KEYS[pin]);
+            sessionStorage.setItem('council_passcode', pin);
+            
+            // Redirect to the portal
+            window.location.href = 'council-portal.html';
+        } else {
+            // FAILURE
+            error.style.display = 'block';
+            document.getElementById('passcode').value = '';
+            document.getElementById('passcode').focus();
+        }
+    }
+
+    // Allow "Enter" key to submit
+    document.getElementById('passcode').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleLogin();
+    });
+</script>
+
+</body>
+</html>

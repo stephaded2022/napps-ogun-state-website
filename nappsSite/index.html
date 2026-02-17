@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NAPPS Ogun State – Official Gateway Portal</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root{
+            --royal-green: #051a13;
+            --deep-green: #020d09;
+            --gold: #c5a028;
+            --gold-light: #e6c860;
+            --paper: #f9f7f2;
+            --glass: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        
+        body{
+            font-family: 'Montserrat', sans-serif;
+            background: var(--paper);
+            color: var(--royal-green);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- HEADER --- */
+        header{
+            position:fixed; top:0; width:100%;
+            background: var(--glass);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            padding: 15px 6%;
+            display:flex; justify-content:space-between; align-items:center;
+            border-bottom: 1px solid rgba(197, 160, 40, 0.15);
+            z-index:1000;
+        }
+
+        .logo{ display:flex; gap:12px; align-items:center; text-decoration: none; }
+        .logo img{ height: 45px; }
+        .logo div { display: flex; flex-direction: column; }
+        .logo h2{ font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--royal-green); line-height: 0.9; font-weight: 700; margin:0;}
+        .logo span{ font-size: 0.65rem; letter-spacing: 3px; color: var(--gold); font-weight: 700; text-transform: uppercase; margin-top: 2px; }
+
+        /* --- DESKTOP NAV --- */
+        nav{ display:flex; gap:25px; align-items:center; }
+        nav a{
+            text-decoration:none; color: var(--royal-green);
+            font-size: 0.75rem; font-weight: 600; text-transform:uppercase;
+            letter-spacing:1px; position: relative; transition: 0.3s;
+        }
+        nav a:hover{ color: var(--gold); }
+        
+        /* Highlight Button Style for Sign Up */
+        nav a.highlight {
+            border: 1px solid var(--royal-green);
+            padding: 8px 18px;
+            border-radius: 2px;
+        }
+        nav a.highlight:hover {
+            background: var(--royal-green);
+            color: var(--gold);
+        }
+
+        /* --- MOBILE MENU --- */
+        .menu-btn{ display:none; font-size:1.5rem; cursor:pointer; color: var(--royal-green); }
+        
+        #mobile{
+            position:fixed; top:0; right:-100%; width:100%; height:100vh;
+            background: var(--royal-green); padding: 80px 40px;
+            transition: 0.4s ease-in-out; z-index:2000;
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        #mobile.active{ right:0; }
+        
+        #mobile a{
+            text-decoration:none; color: rgba(255,255,255,0.8);
+            font-family: 'Cormorant Garamond', serif; font-size: 1.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;
+            transition: 0.3s;
+        }
+        #mobile a:hover{ color: var(--gold); padding-left: 10px; }
+        
+        .close{ position: absolute; top: 25px; right: 25px; color: var(--gold); font-size: 2rem; cursor:pointer; }
+
+        /* --- HERO --- */
+        .hero{
+            height: 90vh;
+            background: linear-gradient(to bottom, rgba(5,26,19,0.6), rgba(5,26,19,0.8)), url("https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1600") center/cover fixed;
+            display:flex; align-items:center; justify-content:center;
+            text-align:center; color:white; padding: 20px;
+        }
+        .hero h1{ font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 30px; }
+        .hero h1 span{ color: #fff; font-style: italic; }
+        
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .hero a{
+            padding: 16px 32px; text-decoration:none; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; border-radius: 2px; transition:0.3s;
+        }
+        .primary{ background: var(--gold); color: var(--royal-green); }
+        .primary:hover{ background: white; }
+        .secondary{ border: 1px solid rgba(255,255,255,0.5); color: white; }
+        .secondary:hover{ border-color: var(--gold); color: var(--gold); }
+
+        /* --- SECTIONS --- */
+        .section{ padding: 80px 6%; }
+        .section-header{ text-align: center; margin-bottom: 50px; }
+        .section-header h2{ font-family: 'Cormorant Garamond'; font-size: 2.5rem; color: var(--royal-green); }
+        .section-header span{ color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; display:block; margin-bottom:10px; }
+
+        /* --- GRID LAYOUTS --- */
+        .initiatives, .registry, .footer-grid{
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;
+        }
+
+        .init{ background: white; padding: 40px; border-top: 3px solid var(--gold); box-shadow: var(--shadow); }
+        .init h3{ font-family: 'Cormorant Garamond'; font-size: 1.5rem; margin: 15px 0; }
+
+        /* --- CARD STYLES --- */
+        .card{ background: white; padding: 15px; border: 1px solid #eee; transition: 0.3s; position:relative; }
+        .card:hover{ transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--gold-light); }
+        .card img{ width: 100%; height: 200px; object-fit: cover; margin-bottom: 15px; }
+        .card h4{ font-family: 'Cormorant Garamond'; font-size: 1.4rem; color: var(--royal-green); margin-bottom: 5px; }
+        .card-meta{ font-size: 0.85rem; color: #666; display:flex; align-items:center; gap:5px; margin-bottom:15px; }
+        .badge{ position:absolute; top:25px; right:25px; background:var(--gold); color:var(--royal-green); padding:5px 10px; font-size:0.7rem; font-weight:700; }
+        
+        .btn-contact{ display:block; width:100%; text-align:center; padding:12px; background:var(--royal-green); color:var(--gold); text-decoration:none; font-size:0.8rem; font-weight:700; transition:0.3s; }
+        .btn-contact:hover{ background:var(--gold); color:var(--royal-green); }
+
+        /* --- SEARCH --- */
+        .search-wrap{ max-width: 600px; margin: 0 auto 50px; position: relative; }
+        .search-wrap input{ width:100%; padding: 15px 25px; border-radius: 50px; border: 1px solid #ddd; outline:none; font-family: 'Cormorant Garamond'; font-size: 1.1rem; }
+        .search-wrap input:focus{ border-color: var(--gold); box-shadow: 0 0 15px rgba(197, 160, 40, 0.2); }
+
+        /* --- FOOTER --- */
+        footer{ background: var(--deep-green); color: rgba(255,255,255,0.7); padding: 80px 6% 30px; }
+        .footer-col h3{ color: white; font-family: 'Cormorant Garamond'; font-size: 1.5rem; margin-bottom: 20px; }
+        .footer-col a{ display: block; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 10px; font-size: 0.9rem; transition:0.3s; }
+        .footer-col a:hover{ color: var(--gold); padding-left: 5px; }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media(max-width: 1024px){
+            nav{ display:none; } /* Hide Desktop Nav */
+            .menu-btn{ display:block; } /* Show Hamburger */
+            .section{ padding: 60px 5%; }
+        }
+        
+        @media(max-width: 600px){
+            .hero h1{ font-size: 3rem; }
+            #mobile{ padding: 60px 20px; width: 85%; } /* Slide-out doesn't cover full width on small phones */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="#" class="logo">
+        <img src="https://via.placeholder.com/80x50/051a13/c5a028?text=N" alt="Logo">
+        <div>
+            <h2>NAPPS</h2>
+            <span>OGUN STATE</span>
+        </div>
+    </a>
+
+    <nav>
+        <a href="gallery.html">Gallery</a>
+        <a href="membership-dashboard.html">Community</a>
+        <a href="register.html" class="highlight">Sign Up</a>
+        <a href="teacher-reg.html">Verified Teacher</a>
+        <a href="unified-examination.html">Unified Exam</a>
+        <a href="membership-guide.html">Members Guide</a>
+        <a href="login.html">Sign In</a>
+        <a href="support.html">Customer Support</a>
+    </nav>
+
+    <div class="menu-btn" onclick="openMenu()"><i class="fas fa-bars-staggered"></i></div>
+</header>
+
+<div id="mobile">
+    <div class="close" onclick="closeMenu()">&times;</div>
+    
+    <a href="gallery.html" onclick="closeMenu()">Gallery</a>
+    <a href="membership-dashboard.html" onclick="closeMenu()">Community</a>
+    <a href="register.html" onclick="closeMenu()">Sign Up</a>
+    <a href="teacher-reg.html" onclick="closeMenu()">Verified Teacher</a>
+    <a href="unified-examination.html" onclick="closeMenu()">Unified Exam</a>
+    <a href="support.html" onclick="closeMenu()">Customer Support</a>
+    <a href="membership-guide.html" onclick="closeMenu()">Members Guide</a>
+       <a href="login.html" onclick="closeMenu()">Sign In</a>
+</div>
+
+<section class="hero">
+    <div class="hero-content">
+        <p>THE GATEWAY STATE CHAPTER</p>
+        <h1>Nurturing <span>Excellence</span></h1>
+        <div class="btn-group">
+            <a href="register.html" class="primary">ENROLL INSTITUTION</a>
+            <a href="teacher-reg.html" class="secondary">CAREER PORTAL</a>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 60px 6%; background: #fff;">
+    <div class="section-header">
+        <span>Official State Registry</span>
+        <h2>Verified Institutions</h2>
+    </div>
+    
+    <iframe src="board.html" 
+            style="width: 100%; height: 500px; border: none; overflow: hidden; border-radius: 8px;" 
+            scrolling="no" loading="lazy">
+    </iframe>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="board.html" target="_blank" style="color: var(--royal-green); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gold);">
+            VIEW FULL DIRECTORY <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <span>Our Mandate</span>
+        <h2>Strategic Initiatives</h2>
+    </div>
+    <div class="initiatives">
+        <div class="init">
+            <i class="fas fa-balance-scale fa-2x" style="color:var(--gold);"></i>
+            <h3>Unified Standards</h3>
+            <p>Coordinated academic quality assurance across all member schools to ensure global competitiveness.</p>
+        </div>
+        <div class="init">
+            <i class="fas fa-users fa-2x" style="color:var(--gold);"></i>
+            <h3>Community</h3>
+            <p>A unified voice representing private school owners before government and regulatory bodies.</p>
+        </div>
+        <div class="init">
+            <i class="fas fa-graduation-cap fa-2x" style="color:var(--gold);"></i>
+            <h3>Teacher Match</h3>
+            <p>The state's first digital bridge connecting qualified educators with top-tier institutions.</p>
+        </div>
+    </div>
+</section>
+
+<section id="registry" class="section" style="background: white;">
+    <div class="section-header">
+        <span>The Directory</span>
+        <h2>Find a School</h2>
+    </div>
+
+    <div class="search-wrap">
+        <input id="searchInput" type="text" placeholder="Search by school name or location...">
+    </div>
+
+    <div id="school-grid" class="registry">
+        <p style="text-align:center; grid-column:1/-1; color:#999;">Loading Verified Schools...</p>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3>NAPPS OGUN</h3>
+            <p>The Association of Private School Owners.<br>Upholding the sanctity of education in the Gateway State.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <a href="register.html">Register School</a>
+            <a href="teacher-reg.html">Teacher Registry</a>
+            <a href="gallery.html">Gallery</a>
+        </div>
+        <div class="footer-col">
+            <h3>Contact</h3>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Secretariat, Abeokuta</a>
+            <a href="mailto:info@nappsogun.org"><i class="fas fa-envelope"></i> info@nappsogun.org</a>
+            <a href="https://wa.me/2347032847436"><i class="fab fa-whatsapp"></i> +234 703 284 7436</a>
+        </div>
+    </div>
+    
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; margin-top: 50px; text-align: center; font-size: 0.8rem;">
+        Engineered by <span style="color:var(--gold); font-weight:700;">ATMOSPHERE</span>
+    </div>
+</footer>
+
+<script>
+    // --- MENU TOGGLE LOGIC ---
+    function openMenu(){ document.getElementById("mobile").classList.add("active"); }
+    function closeMenu(){ document.getElementById("mobile").classList.remove("active"); }
+
+    // --- SCHOOL FETCHING LOGIC (API) ---
+    let allSchools = [];
+
+    async function loadSchools(){
+        try {
+            // Fetch from your Netlify Function
+            const res = await fetch('/api?type=schools');
+            if (!res.ok) throw new Error("API not found");
+            
+            const data = await res.json();
+            // Only show schools that have been 'verified'
+            allSchools = data.filter(s => s.status === 'verified');
+        } catch(e) {
+            console.log("Using Demo Data (API not ready):", e.message);
+            // Fallback data for demonstration if API isn't live yet
+            allSchools = [
+                {school: "Royal College", location: "Abeokuta", phone: "08012345678"},
+                {school: "Gateway Academy", location: "Sango Ota", phone: "08098765432"},
+                {school: "Heritage High", location: "Ijebu Ode", phone: "08055555555"}
+            ]; 
+        }
+        renderSchools(allSchools);
+    }
+
+    function renderSchools(data){
+        const grid = document.getElementById("school-grid");
+        if(data.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; grid-column:1/-1; color:#999;">No verified schools found.</p>';
+            return;
+        }
+
+        grid.innerHTML = data.map(s => `
+            <div class="card">
+                <div class="badge">VERIFIED</div>
+                <img src="${s.image || 'https://via.placeholder.com/400x300/051a13/c5a028?text=NAPPS'}" alt="${s.school}">
+                <h4>${s.school}</h4>
+                <div class="card-meta">
+                    <i class="fas fa-map-marker-alt" style="color:var(--gold)"></i>
+                    <span>${s.location}</span>
+                </div>
+                <a href="tel:${s.phone}" class="btn-contact">
+                    <i class="fas fa-phone-alt"></i> CONTACT INSTITUTION
+                </a>
+            </div>
+        `).join('');
+    }
+
+    // --- SEARCH LOGIC ---
+    document.getElementById("searchInput").addEventListener("input", e => {
+        const q = e.target.value.toLowerCase();
+        const filtered = allSchools.filter(s => 
+            s.school.toLowerCase().includes(q) || 
+            s.location.toLowerCase().includes(q)
+        );
+        renderSchools(filtered);
+    });
+
+    window.onload = loadSchools;
+</script>
+
+</body>
+</html>

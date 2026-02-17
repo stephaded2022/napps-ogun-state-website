@@ -1,0 +1,10 @@
+{
+  "name": "napps-site",
+  "version": "1.0.0",
+  "description": "NAPPS Portal with GitHub Database",
+  "main": "index.js",
+  "dependencies": {
+    "@octokit/rest": "^19.0.0",
+    "busboy": "^1.6.0"
+  }
+}

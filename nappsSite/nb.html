@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NAPPS Ogun State – Official Gateway Portal</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root{
+            --royal-green: #051a13;
+            --deep-green: #020d09;
+            --gold: #c5a028;
+            --gold-light: #e6c860;
+            --paper: #f9f7f2;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.95);
+            --shadow: 0 15px 35px rgba(0,0,0,0.1);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        
+        body{
+            font-family: 'Montserrat', sans-serif;
+            background: var(--paper);
+            color: var(--royal-green);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* --- HEADER ENHANCEMENT --- */
+        header{
+            position:fixed; top:0; width:100%;
+            background: var(--glass);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 12px 6%;
+            display:flex; justify-content:space-between; align-items:center;
+            border-bottom: 1px solid rgba(197, 160, 40, 0.2);
+            z-index:1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .logo{ display:flex; gap:12px; align-items:center; text-decoration: none; }
+        .logo img{ height: 50px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .logo h2{ font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--royal-green); line-height: 0.9; font-weight: 800; }
+        .logo span{ font-size: 0.65rem; letter-spacing: 4px; color: var(--gold); font-weight: 700; text-transform: uppercase; }
+
+        nav{ display:flex; gap:20px; align-items:center; }
+        nav a{
+            text-decoration:none; color: var(--royal-green);
+            font-size: 0.7rem; font-weight: 700; text-transform:uppercase;
+            letter-spacing:1px; transition: var(--transition);
+        }
+        nav a:hover{ color: var(--gold); transform: translateY(-1px); }
+        nav a.highlight {
+            background: var(--royal-green); color: var(--gold);
+            padding: 10px 22px; border-radius: 4px; box-shadow: 0 4px 10px rgba(5, 26, 19, 0.2);
+        }
+
+        /* --- HERO ENHANCEMENT --- */
+        .hero{
+            height: 95vh;
+            background: linear-gradient(to right, rgba(5,26,19,0.8), rgba(5,26,19,0.4)), url("https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1600") center/cover fixed;
+            display:flex; align-items:center; justify-content:flex-start;
+            padding: 0 8%; color:white;
+        }
+        .hero-content{ max-width: 800px; text-align: left; }
+        .hero-content p { color: var(--gold); font-weight: 700; letter-spacing: 5px; margin-bottom: 10px; }
+        .hero h1{ font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; margin-bottom: 35px; }
+        .hero h1 span{ color: var(--gold); font-style: italic; display: block; }
+
+        .btn-group { display: flex; gap: 20px; }
+        .hero a{ padding: 18px 35px; text-decoration:none; font-size: 0.85rem; font-weight: 700; border-radius: 4px; transition: var(--transition); text-transform: uppercase; }
+        .primary{ background: var(--gold); color: var(--royal-green); border: 2px solid var(--gold); }
+        .primary:hover{ background: transparent; color: white; }
+        .secondary{ border: 2px solid rgba(255,255,255,0.4); color: white; }
+        .secondary:hover{ border-color: var(--gold); color: var(--gold); }
+
+
+.iframe-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+.iframe-wrap iframe {
+    width: 100%;
+    height: 520px;
+    border: none;
+    display: block;
+}
+
+/* Mobile adjustment */
+@media(max-width:768px){
+    .iframe-wrap iframe{
+        height: 420px;
+    }
+}
+        /* --- STATS BAR --- */
+        .stats-bar {
+            background: var(--white); display: flex; justify-content: space-around;
+            padding: 40px 6%; margin-top: -60px; position: relative; z-index: 10;
+            box-shadow: var(--shadow); border-radius: 8px; max-width: 1200px; margin-left: auto; margin-right: auto;
+        }
+        .stat-item { text-align: center; }
+        .stat-item h3 { font-size: 2rem; color: var(--royal-green); font-family: 'Cormorant Garamond'; }
+        .stat-item p { font-size: 0.7rem; font-weight: 700; color: var(--gold); text-transform: uppercase; }
+
+        /* --- SECTION STYLING --- */
+        .section{ padding: 100px 6%; }
+        .section-header{ text-align: center; margin-bottom: 60px; }
+        .section-header span{ color: var(--gold); font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; font-weight: 800; display:block; margin-bottom:15px; }
+        .section-header h2{ font-family: 'Cormorant Garamond'; font-size: 3rem; color: var(--royal-green); position: relative; display: inline-block; }
+        .section-header h2::after { content: ''; width: 50px; height: 3px; background: var(--gold); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
+
+        /* --- CARDS & GRID --- */
+        .initiatives, .registry, .footer-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .init{ background: white; padding: 50px 40px; border-radius: 12px; transition: var(--transition); border-bottom: 4px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .init:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: var(--shadow); }
+        .init i { margin-bottom: 25px; display: block; opacity: 0.8; }
+        .init h3{ font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin-bottom: 15px; font-weight: 700; }
+
+        .card{ background: white; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); transition: var(--transition); position:relative; }
+        .card:hover{ transform: scale(1.02); box-shadow: var(--shadow); }
+        .card img{ width: 100%; height: 230px; object-fit: cover; }
+        .card-content { padding: 25px; }
+        .card h4{ font-family: 'Cormorant Garamond'; font-size: 1.6rem; color: var(--royal-green); margin-bottom: 10px; }
+        .badge{ position:absolute; top:20px; right:20px; background:var(--gold); color:var(--royal-green); padding:6px 14px; font-size:0.65rem; font-weight:800; border-radius: 4px; }
+        
+        .btn-contact{ display:block; width:100%; text-align:center; padding:15px; background:var(--royal-green); color:var(--gold); text-decoration:none; font-size:0.75rem; font-weight:700; transition:0.3s; margin-top: 15px; border-radius: 4px; }
+        .btn-contact:hover{ background:var(--gold); color:var(--royal-green); }
+
+        /* --- SEARCH ENHANCEMENT --- */
+        .search-wrap{ max-width: 700px; margin: 0 auto 60px; position: relative; }
+        .search-wrap input{ width:100%; padding: 20px 30px; border-radius: 8px; border: 2px solid #eee; outline:none; font-size: 1rem; transition: 0.3s; box-shadow: var(--shadow); }
+        .search-wrap input:focus{ border-color: var(--gold); background: #fff; }
+
+        /* --- FOOTER & DEVELOPER SECTION --- */
+        footer{ background: var(--deep-green); color: rgba(255,255,255,0.6); padding: 100px 6% 40px; position: relative; }
+        .footer-col h3{ color: white; font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin-bottom: 25px; font-weight: 700; }
+        .footer-col a{ display: block; color: rgba(255,255,255,0.5); text-decoration: none; margin-bottom: 12px; font-size: 0.85rem; transition:0.3s; }
+        .footer-col a:hover{ color: var(--gold); padding-left: 8px; }
+
+        /* ACTIONABLE DEVELOPER CARD */
+        .dev-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px; border-radius: 12px;
+            margin-top: 20px;
+        }
+        .dev-box h4 { color: #fff; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        .dev-tag { color: var(--gold); font-weight: 800; font-size: 1.2rem; display: block; margin-bottom: 10px; }
+        .dev-actions { display: flex; gap: 10px; margin-top: 20px; }
+        .dev-btn {
+            flex: 1; text-align: center; padding: 10px; font-size: 0.7rem; font-weight: 700;
+            text-decoration: none; border-radius: 4px; transition: 0.3s;
+        }
+        .dev-wa { background: #25D366; color: white; }
+        .dev-tel { background: white; color: var(--royal-green); }
+        .dev-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+
+        /* --- MOBILE --- */
+        .menu-btn{ display:none; font-size:1.8rem; cursor:pointer; color: var(--royal-green); }
+        #mobile{ position:fixed; top:0; right:-100%; width:100%; height:100vh; background: var(--royal-green); padding: 100px 40px; transition: 0.5s cubic-bezier(0.77,0,0.175,1); z-index:2000; }
+        #mobile.active{ right:0; }
+        #mobile a{ display: block; text-decoration:none; color: white; font-family: 'Cormorant Garamond'; font-size: 2.2rem; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .close{ position: absolute; top: 30px; right: 30px; color: var(--gold); font-size: 2.5rem; }
+
+        @media(max-width: 1024px){
+            nav{ display:none; }
+            .menu-btn{ display:block; }
+            .hero{ justify-content: center; text-align: center; }
+            .stats-bar { grid-template-columns: 1fr 1fr; gap: 20px; width: 90%; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="#" class="logo">
+        <img src="https://via.placeholder.com/100x100/051a13/c5a028?text=N" alt="Logo">
+        <div>
+            <h2>NAPPS</h2>
+            <span>OGUN STATE</span>
+        </div>
+    </a>
+    <nav>
+        <a href="gallery.html">Gallery</a>
+        <a href="membership-dashboard.html">Community</a>
+        <a href="unified-examination.html">Unified Exam</a>
+        <a href="teacher-reg.html">Verified Teacher</a>
+        <a href="register.html" class="highlight">Sign Up</a>
+        <a href="login.html">Sign In</a>
+    </nav>
+    <div class="menu-btn" onclick="openMenu()"><i class="fas fa-bars-staggered"></i></div>
+</header>
+
+<div id="mobile">
+    <div class="close" onclick="closeMenu()">&times;</div>
+    <a href="gallery.html" onclick="closeMenu()">Gallery</a>
+    <a href="register.html" onclick="closeMenu()">Sign Up</a>
+    <a href="teacher-reg.html" onclick="closeMenu()">Verified Teacher</a>
+    <a href="unified-examination.html" onclick="closeMenu()">Unified Exam</a>
+    <a href="login.html" onclick="closeMenu()">Sign In</a>
+</div>
+
+<section class="hero">
+    <div class="hero-content">
+        <p>THE GATEWAY STATE CHAPTER</p>
+        <h1>Developing the <span>Future of Ogun</span></h1>
+        <div class="btn-group">
+            <a href="register.html" class="primary">Enroll Institution</a>
+            <a href="teacher-reg.html" class="secondary">Career Portal</a>
+        </div>
+    </div>
+</section>
+<section class="section" style="padding-top:40px;">
+    <div class="iframe-wrap">
+        <iframe src="board.html" loading="lazy"></iframe>
+    </div>
+</section>
+<div class="stats-bar">
+    <div class="stat-item"><h3>1,200+</h3><p>Verified Schools</p></div>
+    <div class="stat-item"><h3>15k+</h3><p>Certified Teachers</p></div>
+    <div class="stat-item"><h3>20</h3><p>Local Govts</p></div>
+    <div class="stat-item"><h3>100%</h3><p>Excellence</p></div>
+</div>
+
+<section class="section">
+    <div class="section-header">
+        <span>Trust & Quality</span>
+        <h2>Our Core Mandate</h2>
+    </div>
+    <div class="initiatives">
+        <div class="init">
+            <i class="fas fa-shield-halved fa-3x" style="color:var(--gold);"></i>
+            <h3>Quality Assurance</h3>
+            <p>Setting the benchmark for private education through rigorous periodic accreditation.</p>
+        </div>
+        <div class="init">
+            <i class="fas fa-microchip fa-3x" style="color:var(--gold);"></i>
+            <h3>Digital Unified Exams</h3>
+            <p>Seamless standardized testing across the state using modern technological frameworks.</p>
+        </div>
+        <div class="init">
+            <i class="fas fa-user-check fa-3x" style="color:var(--gold);"></i>
+            <h3>Teacher Placement</h3>
+            <p>Bridging the gap between specialized educators and the state's most prestigious schools.</p>
+        </div>
+    </div>
+</section>
+
+<section style="background: var(--white); border-radius: 40px 40px 0 0;" class="section">
+    <div class="section-header">
+        <span>Official Registry</span>
+        <h2>Verified Institutions</h2>
+    </div>
+    <div class="search-wrap">
+        <input id="searchInput" type="text" placeholder="Search schools by name, location or LGA...">
+    </div>
+    <div id="school-grid" class="registry">
+        </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3>NAPPS OGUN</h3>
+            <p>The apex body for private education in the Gateway State. We uphold the sanctity of learning through unity and discipline.</p>
+            <div style="margin-top: 25px; font-size: 1.5rem; display: flex; gap: 20px;">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Quick Portals</h3>
+            <a href="register.html">School Registration</a>
+            <a href="teacher-reg.html">Teacher Registry</a>
+            <a href="unified-examination.html">Exam Portal</a>
+            <a href="membership-guide.html">Constitution</a>
+            <a href="support.html">Member Support</a>
+        </div>
+
+        <div class="footer-col">
+            <div class="dev-box">
+                <h4>Technical Partner</h4>
+                <span class="dev-tag">ATMOSPHERE TECH</span>
+                <p style="font-size: 0.75rem;">Contact support for portal login issues, registration bugs, or technical inquiries.</p>
+                <div class="dev-actions">
+                    <a href="https://wa.me/2347032847436?text=Hi%20Atmosphere,%20I%20need%20technical%20help%20with%20the%20NAPPS%20Portal" class="dev-btn dev-wa"><i class="fab fa-whatsapp"></i> Chat Support</a>
+                    <a href="tel:+2347032847436" class="dev-btn dev-tel"><i class="fas fa-phone"></i> Call Dev</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; margin-top: 60px; text-align: center; font-size: 0.7rem; letter-spacing: 2px;">
+        &copy; 2026 NAPPS OGUN STATE CHAPTER. ALL RIGHTS RESERVED.
+    </div>
+</footer>
+
+<script>
+    function openMenu(){ document.getElementById("mobile").classList.add("active"); }
+    function closeMenu(){ document.getElementById("mobile").classList.remove("active"); }
+
+    let allSchools = [
+        {school: "Royal College", location: "Abeokuta South", phone: "08012345678"},
+        {school: "Gateway Academy", location: "Sango Ota", phone: "08098765432"},
+        {school: "Heritage High", location: "Ijebu Ode", phone: "08055555555"},
+        {school: "Crescent International", location: "Ifo LGA", phone: "07044443322"}
+    ];
+
+    function renderSchools(data){
+        const grid = document.getElementById("school-grid");
+        grid.innerHTML = data.map(s => `
+            <div class="card">
+                <div class="badge">ACCREDITED</div>
+                <img src="https://via.placeholder.com/400x300/051a13/c5a028?text=${s.school}" alt="${s.school}">
+                <div class="card-content">
+                    <h4>${s.school}</h4>
+                    <p style="font-size: 0.8rem; color: #666;"><i class="fas fa-map-marker-alt" style="color:var(--gold)"></i> ${s.location}</p>
+                    <a href="tel:${s.phone}" class="btn-contact">CONTACT INSTITUTION</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    document.getElementById("searchInput").addEventListener("input", e => {
+        const q = e.target.value.toLowerCase();
+        const filtered = allSchools.filter(s => s.school.toLowerCase().includes(q) || s.location.toLowerCase().includes(q));
+        renderSchools(filtered);
+    });
+
+    window.onload = () => renderSchools(allSchools);
+</script>
+
+</body>
+</html>

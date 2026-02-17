@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NAPPS Ogun | Member Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #062117; --accent: #d4af37; }
+        body { background: #fdfbf7; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .login-card { background: white; padding: 40px; width: 100%; max-width: 400px; border: 1px solid #ddd; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        input { width: 100%; padding: 15px; margin: 15px 0; border: 1px solid #ccc; font-size: 1rem; }
+        button { width: 100%; padding: 15px; background: var(--primary); color: var(--accent); border: none; font-weight: bold; cursor: pointer; letter-spacing: 1px; }
+        .error { color: #be123c; font-size: 0.8rem; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.2rem; margin-bottom: 10px;">Member Portal</h2>
+        <p style="color: #666; font-size: 0.85rem;">Enter your registered Phone Number to access your dashboard.</p>
+        <input type="text" id="phone" placeholder="080XXXXXXXX">
+        <button onclick="attemptLogin()">ACCESS PORTAL</button>
+        <p id="errMsg" class="error">Access Denied: School not found or verification pending.</p>
+    </div>
+
+    <script>
+        async function attemptLogin() {
+            const phone = document.getElementById('phone').value;
+            const btn = document.querySelector('button');
+            btn.innerText = "VERIFYING...";
+            
+            const res = await fetch('/.netlify/functions/submit?type=school');
+            const schools = await res.json();
+            
+            // Match phone and ensure admin has verified them
+            const school = schools.find(s => s.phone === phone && s.status === 'verified');
+            
+            if(school) {
+                sessionStorage.setItem('activeSchool', JSON.stringify(school));
+                window.location.href = 'membership-dashboard.html';
+            } else {
+                document.getElementById('errMsg').style.display = 'block';
+                btn.innerText = "ACCESS PORTAL";
+            }
+        }
+    </script>
+</body>
+</html>
