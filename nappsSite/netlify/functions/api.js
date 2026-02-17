@@ -2,7 +2,7 @@ const { Octokit } = require("@octokit/rest");
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const OWNER = "stephaded2022";
-const REPO = "Napps-Site";
+const REPO = "napps-ogun-state-website";
 
 const DATABASE = {
   schools: "data/schools.json",
