@@ -8,7 +8,8 @@ const DATABASE = {
   schools: "data/schools.json",
   teachers: "data/teachers.json",
   executives: "data/executives.json",
-  logs: "data/logs.json"
+  logs: "data/logs.json",
+  notifications: "data/notification.json",
 };
 
 async function getDatabase(type) {
