@@ -1,6 +1,7 @@
 [build]
   publish = "nappsSite"
   functions = "nappsSite/netlify/functions"
+  command = "npm install"
 
 [[headers]]
   for = "/*"
