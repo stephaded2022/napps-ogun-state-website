@@ -1,0 +1,15 @@
+[build]
+  publish = "nappsSite"
+  functions = "nappsSite/netlify/functions"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    X-Frame-Options = "ALLOWALL"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
